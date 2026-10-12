@@ -1,0 +1,405 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: GitHub Issue Weekly Report
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:1.0.7@f36c3761167b3af0bfb4975b728fe3cd126342d076e1ec5359e6d4f92557d3d4
+    version: null
+- current_identifier: null
+  type: package
+  value:
+    plugin_unique_identifier: norton-wu/github-issue-helper:0.1.0@f238b59781eff46983f7e3077f351350cc999da5c5bcc73a7c5aa9dcf9f3e3e4
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 15
+        single_chunk_attachment_limit: 10
+        skill_file_size_limit: 50
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: tool
+      id: 1791819398261-source-1791821805856-target
+      selected: false
+      source: '1791819398261'
+      sourceHandle: source
+      target: '1791821805856'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: tool
+        targetType: llm
+      id: 1791821805856--1791821934133-target
+      selected: false
+      source: '1791821805856'
+      sourceHandle: source
+      target: '1791821934133'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: end
+      id: 1791821934133-source-1791823392958-target
+      source: '1791821934133'
+      sourceHandle: source
+      target: '1791823392958'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - default: langgenius
+          hint: ''
+          label: Repository owner
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: owner
+        - default: dify
+          hint: ''
+          label: Repository name
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: repo
+      height: 135
+      id: '1791819398261'
+      position:
+        x: 0
+        y: 0
+      positionAbsolute:
+        x: 0
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        is_team_authorization: true
+        paramSchemas:
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The GitHub username or organization that owns the repo.
+            ja_JP: The GitHub username or organization that owns the repo.
+            pt_BR: The GitHub username or organization that owns the repo.
+            zh_Hans: 仓库的 GitHub 用户名或组织名。
+          input_schema: null
+          label:
+            en_US: Repository Owner
+            ja_JP: Repository Owner
+            pt_BR: Repository Owner
+            zh_Hans: 仓库所有者
+          llm_description: The GitHub username or organization that owns the repository.
+          max: null
+          min: null
+          multiple: false
+          name: owner
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: null
+          form: llm
+          human_description:
+            en_US: The name of the repository.
+            ja_JP: The name of the repository.
+            pt_BR: The name of the repository.
+            zh_Hans: 仓库名称。
+          input_schema: null
+          label:
+            en_US: Repository Name
+            ja_JP: Repository Name
+            pt_BR: Repository Name
+            zh_Hans: 仓库名称
+          llm_description: The name of the GitHub repository.
+          max: null
+          min: null
+          multiple: false
+          name: repo
+          options: []
+          placeholder: null
+          precision: null
+          required: true
+          scope: null
+          template: null
+          type: string
+        - auto_generate: null
+          default: open
+          form: llm
+          human_description:
+            en_US: Filter issues by state.
+            ja_JP: Filter issues by state.
+            pt_BR: Filter issues by state.
+            zh_Hans: 按状态筛选 Issues。
+          input_schema: null
+          label:
+            en_US: Issue State
+            ja_JP: Issue State
+            pt_BR: Issue State
+            zh_Hans: Issue 状态
+          llm_description: Filter issues by their state. Defaults to open.
+          max: null
+          min: null
+          multiple: false
+          name: state
+          options:
+          - icon: ''
+            label:
+              en_US: Open
+              ja_JP: Open
+              pt_BR: Open
+              zh_Hans: 开启
+            value: open
+          - icon: ''
+            label:
+              en_US: Closed
+              ja_JP: Closed
+              pt_BR: Closed
+              zh_Hans: 已关闭
+            value: closed
+          - icon: ''
+            label:
+              en_US: All
+              ja_JP: All
+              pt_BR: All
+              zh_Hans: 全部
+            value: all
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: select
+        - auto_generate: null
+          default: 10
+          form: llm
+          human_description:
+            en_US: Number of issues to return (1-100).
+            ja_JP: Number of issues to return (1-100).
+            pt_BR: Number of issues to return (1-100).
+            zh_Hans: 返回的 Issue 数量（1-100）。
+          input_schema: null
+          label:
+            en_US: Results Per Page
+            ja_JP: Results Per Page
+            pt_BR: Results Per Page
+            zh_Hans: 每页结果数
+          llm_description: Number of issues to return, between 1 and 100. Default
+            10.
+          max: 100
+          min: 1
+          multiple: false
+          name: per_page
+          options: []
+          placeholder: null
+          precision: null
+          required: false
+          scope: null
+          template: null
+          type: number
+        params:
+          owner: ''
+          per_page: ''
+          repo: ''
+          state: ''
+        plugin_id: norton-wu/github-issue-helper
+        plugin_unique_identifier: norton-wu/github-issue-helper:0.1.0@f238b59781eff46983f7e3077f351350cc999da5c5bcc73a7c5aa9dcf9f3e3e4
+        provider_icon: https://cloud.dify.ai/console/api/workspaces/current/plugin/icon?tenant_id=2f753da8-88db-43a8-9243-ce81b379f786&filename=14b88e8bbba634849b1b1f87bdd64cf40954db892af269fda5002280100f08d7.svg
+        provider_id: norton-wu/github-issue-helper/github
+        provider_name: norton-wu/github-issue-helper/github
+        provider_show_name: GitHub
+        provider_type: builtin
+        selected: false
+        title: 列出 Issues
+        tool_configurations: {}
+        tool_description: 列出某个 GitHub 仓库的 Issues。
+        tool_label: 列出 Issues
+        tool_name: list_issues
+        tool_node_version: '2'
+        tool_parameters:
+          owner:
+            type: mixed
+            value: '{{#1791819398261.owner#}}'
+          per_page:
+            type: constant
+            value: 10
+          repo:
+            type: mixed
+            value: '{{#1791819398261.repo#}}'
+          state:
+            type: constant
+            value: open
+        type: tool
+      height: 52
+      id: '1791821805856'
+      position:
+        x: 302
+        y: 0
+      positionAbsolute:
+        x: 302
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-5
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: e7215a44-7356-4f76-a5d6-e6fa77d20aff
+          role: system
+          text: 'You are a developer advocate assistant that writes a concise weekly
+            GitHub issue digest.Write the report in Markdown with exactly these sections:##
+            GitHub Issue Weekly ReportOne sentence overview.### HighlightsThe 3 most
+            important issues, prioritizing bugs, security, and high-priority labels.Format:
+            - [#number](url) Title - @user (labels)### By CategoryGroup issues under:
+            Bugs, Feature Requests, Refactor, Chore, Other. Each issue appears exactly
+            once. Write "No items this week." for empty categories.### Suggested Next
+            Steps3 actionable recommendations.Rules:- Use only the data provided in
+            the issues JSON. Never invent issues, numbers, URLs, or labels.- Keep
+            the whole report under 500 words.'
+        - id: 1aca2a6f-c564-4376-b8be-70392eb9fdbc
+          role: user
+          text: 'Here are the open issues for the GitHub repository {{#1791819398261.owner#}}/{{#1791819398261.repo#}}.
+            Generate the weekly report based on the Issues JSON below.
+
+
+            Issues JSON:
+
+            {{#1791821805856.text#}}'
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: '1791821934133'
+      position:
+        x: 604
+        y: 0
+      positionAbsolute:
+        x: 604
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1791821934133'
+          - text
+          value_type: string
+          variable: weekly_report
+        selected: true
+        title: 输出
+        type: end
+      height: 89
+      id: '1791823392958'
+      position:
+        x: 906
+        y: 0
+      positionAbsolute:
+        x: 906
+        y: 0
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    viewport:
+      x: -169.39999999999992
+      y: 282.35
+      zoom: 0.7
+  rag_pipeline_variables: []
