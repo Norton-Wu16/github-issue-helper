@@ -1,0 +1,82 @@
+identity:
+  name: list_issues
+  author: norton-wu
+  label:
+    en_US: List Issues
+    zh_Hans: 列出 Issues
+
+description:
+  human:
+    en_US: List issues in a GitHub repository.
+    zh_Hans: 列出某个 GitHub 仓库的 Issues。
+  llm: List issues in a GitHub repository. Supports filtering by state.
+
+parameters:
+  - name: owner
+    type: string
+    required: true
+    label:
+      en_US: Repository Owner
+      zh_Hans: 仓库所有者
+    human_description:
+      en_US: The GitHub username or organization that owns the repo.
+      zh_Hans: 仓库的 GitHub 用户名或组织名。
+    llm_description: The GitHub username or organization that owns the repository.
+    form: llm
+
+  - name: repo
+    type: string
+    required: true
+    label:
+      en_US: Repository Name
+      zh_Hans: 仓库名称
+    human_description:
+      en_US: The name of the repository.
+      zh_Hans: 仓库名称。
+    llm_description: The name of the GitHub repository.
+    form: llm
+
+  - name: state
+    type: select
+    required: false
+    options:
+      - value: open
+        label:
+          en_US: Open
+          zh_Hans: 开启
+      - value: closed
+        label:
+          en_US: Closed
+          zh_Hans: 已关闭
+      - value: all
+        label:
+          en_US: All
+          zh_Hans: 全部
+    default: open
+    label:
+      en_US: Issue State
+      zh_Hans: Issue 状态
+    human_description:
+      en_US: Filter issues by state.
+      zh_Hans: 按状态筛选 Issues。
+    llm_description: Filter issues by their state. Defaults to open.
+    form: llm
+
+  - name: per_page
+    type: number
+    required: false
+    min: 1
+    max: 100
+    default: 10
+    label:
+      en_US: Results Per Page
+      zh_Hans: 每页结果数
+    human_description:
+      en_US: Number of issues to return (1-100).
+      zh_Hans: 返回的 Issue 数量（1-100）。
+    llm_description: Number of issues to return, between 1 and 100. Default 10.
+    form: llm
+
+extra:
+  python:
+    source: tools/list_issues.py
