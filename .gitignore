@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+*.difypkg
+.DS_Store
+*.log
+launcher.py
+run_diag.py
