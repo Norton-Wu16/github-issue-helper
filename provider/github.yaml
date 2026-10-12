@@ -1,0 +1,34 @@
+identity:
+  author: norton-wu
+  name: github
+  label:
+    en_US: GitHub
+    zh_Hans: GitHub
+  description:
+    en_US: GitHub REST API for listing issues and pull requests.
+    zh_Hans: 用于查询 Issues 和 Pull Requests 的 GitHub REST API。
+  icon: icon.svg
+  tags:
+    - productivity
+
+credentials_for_provider:
+  github_token:
+    type: secret-input
+    required: true
+    label:
+      en_US: GitHub Personal Access Token
+      zh_Hans: GitHub 个人访问令牌
+    placeholder:
+      en_US: ghp_xxxxxxxxxxxxxxxxxxxx
+      zh_Hans: 请输入你的 GitHub Token
+    help:
+      en_US: Create a token at https://github.com/settings/tokens with repo scope.
+      zh_Hans: 在 https://github.com/settings/tokens 创建具有 repo 权限的 Token。
+    url: https://github.com/settings/tokens
+
+tools:
+  - tools/list_issues.yaml
+
+extra:
+  python:
+    source: provider/github.py
